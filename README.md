@@ -1,6 +1,6 @@
 # RO-UPLOADER
 
-RO-UPLOADER is a tool developed by 5nz to help you efficiently mass upload assets to ROBLOX without any issues. This uploader uses the Open Cloud API Key.
+RO-UPLOADER is a tool developed by 5nz to help you mass upload assets to ROBLOX without any issues. This uploader uses the Open Cloud API Key.
 
 ## Features
 
@@ -17,7 +17,7 @@ RO-UPLOADER is a tool developed by 5nz to help you efficiently mass upload asset
    - Click [here](https://github.com) to download the RO-UPLOADER.rar file and extract it anywhere you want.
 
 - 🚀 **Launch RO-UPLOADER:**
-   - Run `rouploader.exe` to start the application.
+   - Open the "RO-UPLOADER" Folder and then Run `rouploader.exe` to start the application.
 
 ### Option 2: Running from source
 
