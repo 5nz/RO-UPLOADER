@@ -43,5 +43,5 @@ RO-UPLOADER is a tool developed by 5nz to help you efficiently mass upload asset
 
 ## Credits
 
-* **5nz:** Founder of RO-UPLOADER
+* **5nz:** **Founder of RO-UPLOADER**
 * **JOIN SMOKE GANG:** [here](https://discord.gg/4wffQmV6mR)
