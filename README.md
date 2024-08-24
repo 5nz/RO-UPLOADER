@@ -17,7 +17,7 @@ RO-UPLOADER is a tool developed by 5nz to help you mass upload assets to ROBLOX 
    - Click [here](https://github.com) to download the RO-UPLOADER.rar file and extract it anywhere you want.
 
 - 🚀 **Launch RO-UPLOADER:**
-   - Open the "RO-UPLOADER" Folder and then Run `rouploader.exe` to start the application.
+   - Open the `RO-UPLOADER` Folder and then Run `rouploader.exe` to start the application.
 
 ### Option 2: Running from source
 
