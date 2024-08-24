@@ -1,0 +1,5 @@
+sounddevice
+scipy
+requests
+requests-toolbelt
+Pillow
