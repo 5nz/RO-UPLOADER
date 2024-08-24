@@ -1,4 +1,3 @@
 # RO-UPLOADER
 
-made
-a
+made by 5nz
