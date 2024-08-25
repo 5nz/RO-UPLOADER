@@ -25,7 +25,7 @@ def resource_path(relative_path):
 
     return os.path.join(base_path, relative_path)
 
-class Roblox:
+class Uploader:
     def __init__(self, config_file=resource_path("./Data/config.json")):
         self.config_file = config_file
         self.load_config()
@@ -40,6 +40,19 @@ class Roblox:
     def save_config(self):
         with open(self.config_file, "w") as f:
             json.dump(self.config, f, indent=4)
+            
+    def load_user_info(self):
+        user_info_file = resource_path("./Data/user_info.json")
+        try:
+            with open(user_info_file, "r") as f:
+                return json.load(f)
+        except FileNotFoundError:
+            return None    
+    
+    def save_user_info(self, user_info):
+        userINFOFILE = resource_path("./Data/user_info.json")
+        with open(userINFOFILE, "w") as f:
+            json.dump(user_info, f, indent=4)
 
     def get_csrf_token(self):
         url = "https://auth.roblox.com/v2/logout"
@@ -112,7 +125,7 @@ class Roblox:
             "x-api-key": self.config.get('api_key'),
             "Content-Type": "application/json",
         }
-        user_info = self.get_user_info()
+        user_info = self.load_user_info()
         if user_info is None:
             return "Failed to get user info."
 
@@ -126,7 +139,7 @@ class Roblox:
                         "description": "[ RO-UPLOADER || BY 5NZ ]",
                         "creationContext": {
                             "creator": {
-                                "userId": user_info["id"]
+                                "userId": user_info["userID"]
                             }
                         }
                     })
@@ -177,7 +190,7 @@ def process_image(file_path):
         return output.read()
 
 
-class RobloxUI:
+class ROUPLOADERUI:
     def __init__(self, root):
         self.root = root
         self.root.title("RO-UPLOADER || BY 5NZ")
@@ -193,7 +206,7 @@ class RobloxUI:
         self.style.configure('TLabel', background='#26242f', foreground='white')
         
         
-        self.roblox = Roblox()
+        self.roblox = Uploader()
 
         self.tab_control = ttk.Notebook(root)
         
@@ -240,6 +253,41 @@ class RobloxUI:
 
         self.log_text = scrolledtext.ScrolledText(self.log_tab, wrap=tk.WORD, height=10, width=50, state='disabled', bg='#26242f', fg='white')
         self.log_text.pack(fill='both', expand=True)
+        
+        self.log("------------------------------------------------")
+        self.log("RO-UPLOADER UI loaded successfully!")
+        self.log("Made and coded by 5nz!")
+        self.log("Join the discord server: discord.gg/4wffQmV6mR")
+        self.log("------------------------------------------------\n")
+        
+        
+        
+        self.account_info_tab = ttk.Frame(self.tab_control)
+        self.tab_control.add(self.account_info_tab, text='Account Info')
+
+        self.username_label = ttk.Label(self.account_info_tab, text="Username:")
+        self.username_label.pack(pady=(10, 5))
+        self.username_value = ttk.Label(self.account_info_tab, text="")
+        self.username_value.pack(pady=(0, 10))
+
+        self.user_id_label = ttk.Label(self.account_info_tab, text="User ID:")
+        self.user_id_label.pack(pady=(10, 5))
+        self.user_id_value = ttk.Label(self.account_info_tab, text="")
+        self.user_id_value.pack(pady=(0, 10))
+
+        self.api_key_label = ttk.Label(self.account_info_tab, text="API Key:")
+        self.api_key_label.pack(pady=(10, 5))
+        self.api_key_value = ttk.Label(self.account_info_tab, text="Click to reveal")
+        self.api_key_value.pack(pady=(0, 10))
+        self.api_key_value.bind("<Button-1>", self.reveal_api_key)
+
+        self.profile_button = ttk.Button(self.account_info_tab, text="Profile", command=self.open_profile)
+        self.profile_button.pack(pady=10)
+
+        self.inventory_button = ttk.Button(self.account_info_tab, text="Inventory", command=self.open_inventory)
+        self.inventory_button.pack(pady=10)
+
+        self.load_account_info()
 
 
         self.credits_tab = ttk.Frame(self.tab_control, style='TFrame')
@@ -282,6 +330,14 @@ class RobloxUI:
                 sd.wait()
             else:
                 messagebox.showinfo("Success", f"API Key Created: {api_key}")
+                user_info = self.roblox.get_user_info()
+                if user_info is not None:
+                    user_info_to_save = {
+                        "userID": user_info["id"],
+                        "userName": user_info["name"]
+                    }
+                    self.roblox.save_user_info(user_info_to_save)
+                    self.load_account_info()
         else:
             messagebox.showwarning("Error", "Please enter the Roblox cookie.")
             fs, data = read(resource_path("./Data/SFX/error.wav"))
@@ -340,8 +396,51 @@ class RobloxUI:
         photo = ImageTk.PhotoImage(image)
         self.image_preview_label.config(image=photo)
         self.image_preview_label.image = photo
+        
+    def load_account_info(self):
+        user_info = self.roblox.load_user_info()
+        if user_info is not None:
+            self.username_value.config(text=user_info["userName"])
+            self.user_id_value.config(text=str(user_info["userID"]))
+
+    def reveal_api_key(self, event):
+        api_key = self.roblox.config.get('api_key')
+        if api_key:
+            self.api_key_value.config(text=api_key, wraplength=400)
+            self.api_key_frame = ttk.Frame(self.account_info_tab)
+            self.api_key_frame.pack(pady=(0, 10))
+
+            self.hide_button = ttk.Button(self.api_key_frame, text="Hide", command=self.hide_api_key)
+            self.hide_button.pack(side=tk.LEFT, padx=(0, 5))
+
+            self.copy_button = ttk.Button(self.api_key_frame, text="Copy", command=lambda: self.copy_to_clipboard(api_key))
+            self.copy_button.pack(side=tk.LEFT, padx=(0, 5))
+        else:
+            self.api_key_value.config(text="No API key found")
+            
+    def hide_api_key(self):
+        self.api_key_value.config(text="Click to reveal")
+        self.api_key_frame.destroy()
+
+    def copy_to_clipboard(self, text):
+        self.root.clipboard_clear()
+        self.root.clipboard_append(text)
+    def open_profile(self):
+        user_info = self.roblox.load_user_info()
+        if user_info is not None:
+            url = f"https://www.roblox.com/users/{user_info['userID']}/profile"
+            self.open_link(url)
+
+    def open_inventory(self):
+        user_info = self.roblox.load_user_info()
+        if user_info is not None:
+            url = f"https://www.roblox.com/users/{user_info['userID']}/inventory#!/accessories"
+            self.open_link(url)
 
 if __name__ == "__main__":
     root = tk.Tk()
-    app = RobloxUI(root)
-    root.mainloop()
+    app = ROUPLOADERUI(root)
+    try:
+        root.mainloop()
+    except KeyboardInterrupt:
+        pass
