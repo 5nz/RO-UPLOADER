@@ -31,7 +31,7 @@ RO-UPLOADER is a tool developed by 5nz to help you mass upload assets to ROBLOX 
    - Open a terminal in the extracted folder and run `pip install -r requirements.txt` to install the necessary dependencies.
 
 - 🗒️ **Launch RO-UPLOADER:**
-   - Run `python rouploader.py` to start the application.
+   - Run `python rouploader.py` in terminal to start the application, Or you can just double click `rouploader.py`.
 
 **Note:** You don't need to run `setup.bat` if you're using the `.exe` file. The `.exe` file is a self-contained package that includes all the necessary dependencies. If you're running from source, you'll need to install the dependencies manually using `pip`.
 
