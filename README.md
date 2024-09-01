@@ -4,7 +4,8 @@ RO-UPLOADER is a tool developed by 5nz to help you mass upload assets to ROBLOX 
 
 ## Features
 
-- **Decal Mass Uploader:** Easily upload multiple decals in one go.
+- **Decal Mass Uploader:** Easily upload multiple `decals` in one go.
+- **TSHIRT Mass Uploader:** Upload multiple `TSHIRTS` in one go 😱.
 
 ## Installation
 
