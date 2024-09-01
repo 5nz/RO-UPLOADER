@@ -36,9 +36,9 @@ RO-UPLOADER is a tool developed by 5nz to help you mass upload assets to ROBLOX 
 **Note:** You don't need to run `setup.bat` if you're using the `.exe` file. The `.exe` file is a self-contained package that includes all the necessary dependencies. If you're running from source, you'll need to install the dependencies manually using `pip`.
 
 ## TODO
-- [ ] Add support for uploading other asset types (e.g., T-SHIRT, AUDIO, etc.)
-- [ ] Add webhook Support
-- [ ] Add inventory logging Tab
+- [X] Add support for uploading other asset types (e.g., T-SHIRT.)
+- [-] Add webhook Support
+- [-] Add inventory logging Tab
 
 
 ## Credits
