@@ -37,8 +37,8 @@ RO-UPLOADER is a tool developed by 5nz to help you mass upload assets to ROBLOX 
 
 ## TODO
 - [X] Add support for uploading other asset types (e.g., T-SHIRT.)
-- [-] Add webhook Support
-- [-] Add inventory logging Tab
+- [*] Add webhook Support
+- [*] Add inventory logging Tab
 
 
 ## Credits
