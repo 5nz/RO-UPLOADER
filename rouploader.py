@@ -1,5 +1,6 @@
 """ ERM THE SIGMA DONT CHANGE ANYTHING BELOW IF YOU DONT KNOW WHAT YOUR DOING PLEASE AND THANKS AND BYE! join the discord server discord.gg/4wffQmV6mR"""
 """ Note For the people that come to me saying this doesn't work anymore idc, This use's a shitty ass ROBLOX API which gets detected fast ok bye now"""
+"""rouploader was not here okay bye"""
 
 import sounddevice as sd
 from scipy.io.wavfile import read
